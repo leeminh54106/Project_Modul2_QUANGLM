@@ -26,7 +26,7 @@ public class MenuUsers {
             System.out.println(rowColor + "" + borderColor + "     1. Cập nhật thông tin người dùng                             " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     2. Thông tin tài khoản người dùng                            " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     3. Menu address                                              " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     6. Đăng xuất                                                 " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     4. Đăng xuất                                                 " + rowColor);
             System.out.println(bottomColor);
 
             System.out.println(Color.PURPLE + "Lựa chọn của bạn : " + Color.RESET);
@@ -42,16 +42,11 @@ public class MenuUsers {
                     AddressManagement.addressMenu(sc);
                     break;
                 case 4:
-
-                    break;
-                case 5:
-
-                    break;
-                case 6:
+                    System.out.println(Color.GREEN+"Đăng xuất thành công!"+Color.RESET);
                     quit = false;
                     break;
                 default:
-                    System.err.println("Vui lòng nhập lại từ 1 -> 6!");
+                    System.err.println("Vui lòng nhập lại từ 1 -> 4!");
             }
         } while (quit);
 

@@ -75,7 +75,8 @@ public class MenuAdmin {
     }
 
     private void showRole() {
-        System.out.println("ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER");
+        System.out.println(Color.BLUE +"ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER" +Color.RESET);
+        System.out.println();
     }
 
 
@@ -93,6 +94,7 @@ public class MenuAdmin {
                 found = true;
             }
         }
+        System.out.println("+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+"+Color.RESET);
         if (!found) {
             System.out.println("Không tìm thấy người dùng " + userName);
         }

@@ -23,7 +23,7 @@ public class CategoryManagement {
             System.out.println(rowColor + "" + borderColor + "     1. Hiển thị danh sách danh mục                               " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     2. Thêm mới danh muc                                         " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     3. Cập nhật danh mục                                         " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     5. Xóa tác giả                                               " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     4. Xóa danh mục                                              " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     6. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
 
@@ -40,16 +40,13 @@ public class CategoryManagement {
                     updateCategory(sc);
                     break;
                 case 4:
-
-                    break;
-                case 5:
                     deleteCategory(sc);
                     break;
                 case 6:
                     quit = false;
                     break;
                 default:
-                    System.err.println("Lựa chọn từ 1 -> 6, vui lòng chọn lại!");
+                    System.err.println("Lựa chọn từ 1 -> 4, vui lòng chọn lại!");
             }
         } while (quit);
     }

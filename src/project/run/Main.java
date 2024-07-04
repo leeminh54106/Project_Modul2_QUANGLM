@@ -6,6 +6,7 @@ import project.ra.feature.IUserFeature;
 import project.ra.feature.impl.FeatureAll;
 import project.ra.feature.impl.UserImpl;
 import project.ra.utils.Color;
+import project.ra.utils.IOFile;
 import project.run.menu.MenuAdmin;
 import project.run.menu.MenuModerator;
 import project.run.menu.MenuUsers;
@@ -72,6 +73,8 @@ public class Main {
                 break;
             }
         }
+        // cập nhât lại IOFile và chuyền vào users
+        IOFile.writeToFile(IOFile.PATH_USER, UserImpl.users);
         if(!isExit){
             System.err.println("email không đúng!");
         }
@@ -97,21 +100,21 @@ public class Main {
             System.err.println("Email và password không đúng!");
             return;
         }
+        System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
+        System.out.println();
         userLogin = user;
         //check quyền
         if (user.getRoleName().equals(RoleName.ROLE_ADMIN)) {
             MenuAdmin menuAdmin = new MenuAdmin();
             menuAdmin.menuAdmin(sc);
-            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         } else if (user.getRoleName().equals(RoleName.ROLE_MODERATOR)) {
             MenuModerator menuModerator = new MenuModerator();
             menuModerator.menuModerator(sc);
-            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         } else {
             MenuUsers menuUser = new MenuUsers();
             menuUser.menuUsers(sc);
-            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         }
+
     }
 }
 

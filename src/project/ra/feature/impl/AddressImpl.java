@@ -10,6 +10,9 @@ import java.util.List;
 
 public class AddressImpl implements IAddress {
     public static List<Address> addressList = new ArrayList<>();
+    static {
+        addressList = IOFile.readFromFile(IOFile.PATH_ADDRESS);
+    }
 
     //đọc (IOFile)
     public AddressImpl() {

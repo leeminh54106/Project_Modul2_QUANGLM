@@ -19,6 +19,7 @@ public class GeneralProduct {
     public static final ICategory categoryFeatuer = new CategoryImpl();
 
     public  void generalProductMenu(Scanner sc) {
+        boolean quit = true;
         do {
 
             String borderColor = Color.PURPLE;
@@ -52,12 +53,12 @@ public class GeneralProduct {
                     showAllProduct(sc);
                     break;
                 case 6:
-                    System.exit(0);
+                    quit = false;
                     break;
                 default:
                     System.err.println("Lựa chọn từ 1 -> 5, vui lòng nhập lại!");
             }
-        } while (true);
+        } while (quit);
     }
 
     private void showAllProduct(Scanner sc) {
@@ -68,6 +69,8 @@ public class GeneralProduct {
         for(Product p : productFeatuer.findAll()){
             p.displayProduct();
         }
+        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println();
     }
 
     private void searchProductByNameOrDes(Scanner sc) {
@@ -82,6 +85,8 @@ public class GeneralProduct {
             if(p.getProductName().toLowerCase().contains(input.toLowerCase()) || p.getDescription().toLowerCase().contains(input.toLowerCase())) {
                 p.displayProduct();
                 isExist = true;
+                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println();
             }
         }
         if(!isExist) {
@@ -94,6 +99,8 @@ public class GeneralProduct {
         for (Product p : ProductImpl.productList) {
             p.displayProduct();
         }
+        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println();
     }
 
     private void showProduct(Scanner sc) {
@@ -102,16 +109,20 @@ public class GeneralProduct {
             return;
         }
         for (Category ca : categoryFeatuer.findAll()) {
-            System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
-            System.out.printf("║ Mã danh mục: %-10d║ Tên danh mục: %-10s \n",
+            System.out.println(Color.CYAN + "+------------------------+---------------------------------------------+");
+            System.out.printf("| Mã danh mục: %-10d| Tên danh mục: %-30s|\n",
                     ca.getCategoryId(), ca.getCategoryName());
-            System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
+
         }
+        System.out.println("+------------------------+---------------------------------------------+" + Color.RESET);
+        System.out.println();
         System.out.println("Nhập mã danh mục:");
         int number = FeatureAll.inputNumber(sc);
         for (Product p : productFeatuer.findAll()) {
             if (p.getCategory().getCategoryId() == number) {
                 p.displayProduct();
+                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println();
                 return;
             }
         }
@@ -126,6 +137,8 @@ public class GeneralProduct {
             if (p.getProductId() == number) {
                 p.displayProduct();
                 isExist = true;
+                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println();
                 break;
             }
         }
