@@ -1,6 +1,7 @@
 package project.ra.entity;
 
 import project.ra.feature.impl.AddressImpl;
+import project.ra.utils.Color;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -106,11 +107,11 @@ public class Address implements Serializable {
         return max + 1;
     }
     public void displayAddress() {
-        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+");
-        System.out.printf("| Mã địa chỉ: %-5d| Tài khoản: %-10s| Địa chỉ đầy đủ: %-10s|\n",
+        System.out.println(Color.CYAN +"+------------------------+------------------------------------------+---------------------------------------------------------+");
+        System.out.printf("| Mã địa chỉ: %-11d| Tài khoản: %-30s| Địa chỉ đầy đủ: %-40s|\n",
                this.addressId,this.users.getUserName(),this.fullAddress);
-        System.out.printf("|                  | Tên người nhận: %-10s| Số điện thoại: %-5s|\n",
+        System.out.printf("|                        | Tên người nhận: %-25s| Số điện thoại: %-41s|\n",
                 this.receiveName,this.phone);
-        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+");
+
     }
 }
