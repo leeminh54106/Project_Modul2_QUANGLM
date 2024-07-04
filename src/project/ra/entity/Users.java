@@ -2,6 +2,7 @@ package project.ra.entity;
 
 import project.ra.constants.RoleName;
 import project.ra.feature.impl.UserImpl;
+import project.ra.utils.Color;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -219,7 +220,7 @@ public class Users implements Serializable {
                     return phone;
                 }
             } else {
-                System.err.println("Số điện thoại không đúng định dạng!");
+                System.err.println("Số điện thoại phải có 10 ký tự số, bắt đầu từ 0!");
             }
         } while (true);
 
@@ -282,7 +283,7 @@ public class Users implements Serializable {
     }
 
     public String inputUserName(Scanner sc) {
-        String regex = "^[a-zA-Z0-9 ]+$";
+        String regex = "^[a-zA-Z0-9]+$";
         System.out.println("Nhập tên tài khoản:");
         do {
             String userName = sc.nextLine();
@@ -324,12 +325,12 @@ public class Users implements Serializable {
 
     public void displayUser() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
-        System.out.printf("║ Tên đăng nhập: %-10s║ Email: %-10s║ Tên: %-10s║ trạng thái: %-10s \n",
+        System.out.println(Color.CYAN + "+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+");
+        System.out.printf("| Tên đăng nhập: %-20s| Email: %-37s| Tên: %-25s| trạng thái: %-10s| \n",
                 this.userName, this.email, this.fullName, this.status ? "Hoạt động" : "Khóa");
-        System.out.printf("║ Số điện thoại: %-10d║ Địa chỉ: %-10s║ Date: %-10s\n",
-                this.phone,this.adress,sdf.format(this.created));
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
+        System.out.printf("| Số điện thoại: %-20s| Địa chỉ: %-35s| Date: %-24s|                       |\n",
+                this.phone,this.adress,this.created !=null?sdf.format(this.created):"");
+
     }
 }
 

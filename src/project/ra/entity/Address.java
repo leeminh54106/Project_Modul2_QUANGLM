@@ -2,9 +2,11 @@ package project.ra.entity;
 
 import project.ra.feature.impl.AddressImpl;
 
+import java.io.Serializable;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class Address {
+public class Address implements Serializable {
     private int addressId;
     private Users users;
     private String fullAddress;
@@ -63,18 +65,34 @@ public class Address {
     }
 
     public void inputDataAddress(Scanner sc,Users users) {
-//        private int adressId;
-//        private Users users;
-//        private String fullAddress;
-//        private String phone;
-//        private String receiveName;
         this.addressId = autoAddressId();
         this.users = users;
         this.fullAddress = inputFullAddress(sc);
+        this.phone = inputPhoneAddress(sc);
+        this.receiveName = inputReceiveName(sc);
+    }
+
+    private String inputReceiveName(Scanner sc) {
+        System.out.println("Nhập tên người nhận:");
+        return sc.nextLine();
+    }
+
+    private String inputPhoneAddress(Scanner sc) {
+        String regex = "(0)\\d{9}";
+        System.out.println("Nhập số điện thoại:");
+       do {
+           String input = sc.nextLine();
+           if(Pattern.matches(regex,input)){
+               return input;
+           }else {
+               System.err.println("Số điện thoại phải có 10 ký tự số, bắt đầu từ 0!");
+           }
+       }while (true);
     }
 
     public String inputFullAddress(Scanner sc) {
-
+        System.out.println("Nhập địa chỉ đầy đủ:");
+        return sc.nextLine();
     }
 
 
@@ -86,5 +104,13 @@ public class Address {
             }
         }
         return max + 1;
+    }
+    public void displayAddress() {
+        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+");
+        System.out.printf("| Mã địa chỉ: %-5d| Tài khoản: %-10s| Địa chỉ đầy đủ: %-10s|\n",
+               this.addressId,this.users.getUserName(),this.fullAddress);
+        System.out.printf("|                  | Tên người nhận: %-10s| Số điện thoại: %-5s|\n",
+                this.receiveName,this.phone);
+        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+");
     }
 }

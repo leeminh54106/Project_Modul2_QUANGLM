@@ -3,13 +3,15 @@ package project.ra.entity;
 import project.ra.feature.impl.CategoryImpl;
 import project.ra.feature.impl.FeatureAll;
 import project.ra.feature.impl.ProductImpl;
+import project.ra.utils.Color;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Product {
+public class Product implements Serializable {
     private int productId;
     private String productName;
     private String sku;
@@ -20,11 +22,12 @@ public class Product {
     private Category category;
     private Date created;
     private Date updated;
+    private boolean status;
 
     public Product() {
     }
 
-    public Product(Category category, Date created, String description, String image, float price, int productId, String productName, int quantity, String sku, Date updated) {
+    public Product(Category category, Date created, String description, String image, float price, int productId, String productName, int quantity, String sku, boolean status, Date updated) {
         this.category = category;
         this.created = created;
         this.description = description;
@@ -34,6 +37,7 @@ public class Product {
         this.productName = productName;
         this.quantity = quantity;
         this.sku = sku;
+        this.status = status;
         this.updated = updated;
     }
 
@@ -74,7 +78,7 @@ public class Product {
     }
 
     public void setPrice(float price) {
-        price = price;
+        this.price = price;
     }
 
     public int getProductId() {
@@ -109,6 +113,14 @@ public class Product {
         this.sku = sku;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public Date getUpdated() {
         return updated;
     }
@@ -118,7 +130,7 @@ public class Product {
     }
 
     public void inputProduct(Scanner sc) {
-        if(CategoryImpl.categoryList.isEmpty()){
+        if (CategoryImpl.categoryList.isEmpty()) {
             return;
         }
         this.productId = autoProductId();
@@ -129,7 +141,7 @@ public class Product {
         this.category = takeCategory(sc);
         this.created = new Date();
         this.sku = autoSku();
-
+        this.status = true;
     }
 
     public String autoSku() {
@@ -139,11 +151,11 @@ public class Product {
 
     public Category takeCategory(Scanner sc) {
         for (Category ca : CategoryImpl.categoryList) {
-            System.out.println("════════════════════════════════════════════════════════════");
-            System.out.printf("║ Mã danh mục: %-5d║ Tên danh mục: %-10s║ \n",
+            System.out.println(Color.CYAN +"+------------------------+------------------------------+");
+            System.out.printf("| Mã danh mục: %-10d| Tên danh mục: %-15s| \n",
                     ca.getCategoryId(), ca.getCategoryName());
-            System.out.println("════════════════════════════════════════════════════════════");
         }
+        System.out.println(Color.CYAN +"+------------------------+------------------------------+" +Color.RESET);
         System.out.println("Nhập mã danh mục để thêm sản phẩm:");
         do {
             int choice = FeatureAll.inputNumber(sc);
@@ -205,7 +217,7 @@ public class Product {
     }
 
     public String inputProductName(Scanner sc) {
-        System.out.println("Nhập tên danh mục:");
+        System.out.println("Nhập tên sản phẩm:");
         do {
             String name = sc.nextLine();
             if (name.trim().isEmpty()) {
@@ -236,14 +248,16 @@ public class Product {
         }
         return max + 1;
     }
-    public void displayProduct(){
+
+    public void displayProduct() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
-        System.out.printf("║ Mã sản phẩm: %-5d║ Tên sản phẩm: %-10s║ Mô tả: %-10s║ Danh mục: %-10s\n",
-               this.productId,this.productName,this.description,this.category.getCategoryName() );
-        System.out.printf("║ Giá: %-5.2f║ Tồn kho: %-10d║ Thời gian: %-10s\n",
-               this.price,this.quantity,sdf.format(this.created));
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
+        String borderColor = Color.BLUE;
+        String colColor = borderColor + "+------------------------+------------------------------+--------------------------------------+---------------------------------+";
+        System.out.println(colColor);
+        System.out.printf("| Mã sản phẩm: %-10d| Tên sản phẩm: %-15s| Mô tả: %-30s| Danh mục: %-22s|\n",
+                this.productId, this.productName, this.description, this.category.getCategoryName());
+        System.out.printf("|                        | Tồn kho: %-20d| Thời gian: %-26s| Giá: %-27.0f|\n",
+                this.quantity, sdf.format(this.created), this.price);
     }
 }

@@ -28,7 +28,6 @@ public class MenuAdmin {
             System.out.println(rowColor + "" + borderColor + "     3. Tìm kiếm người dùng theo tên                              " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     4. Lấy về danh sách quyền                                    " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     5. Lấy ra danh sách người dùng                               " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     6. Thống kê                                                  " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     7. Đăng xuất                                                 " + rowColor);
             System.out.println(bottomColor);
             System.out.println(Color.PURPLE + "Lựa chọn của bạn : " + Color.RESET);
@@ -62,6 +61,8 @@ public class MenuAdmin {
 
     }
 
+
+
     private void showUserList() {
         if(UserImpl.users.isEmpty()){
             System.err.println("Danh sách người dùng trống");
@@ -70,6 +71,7 @@ public class MenuAdmin {
         for(Users u : UserImpl.users){
             u.displayUser();
         }
+        System.out.println(Color.CYAN + "+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+"+Color.RESET);
     }
 
     private void showRole() {

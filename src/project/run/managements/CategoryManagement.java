@@ -23,8 +23,8 @@ public class CategoryManagement {
             System.out.println(rowColor + "" + borderColor + "     1. Hiển thị danh sách danh mục                               " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     2. Thêm mới danh muc                                         " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     3. Cập nhật danh mục                                         " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     4. Xóa tác giả                                               " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     5. Thoát                                                     " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     5. Xóa tác giả                                               " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     6. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
 
             System.out.println(Color.PURPLE + "Lựa chọn của bạn:" + Color.RESET);
@@ -40,16 +40,21 @@ public class CategoryManagement {
                     updateCategory(sc);
                     break;
                 case 4:
-                    deleteCategory(sc);
+
                     break;
                 case 5:
+                    deleteCategory(sc);
+                    break;
+                case 6:
                     quit = false;
                     break;
                 default:
-                    System.err.println("Lựa chọn từ 1 -> 5, vui lòng chọn lại!");
+                    System.err.println("Lựa chọn từ 1 -> 6, vui lòng chọn lại!");
             }
         } while (quit);
     }
+
+
 
     private static void deleteCategory(Scanner sc) {
         System.out.println("Nhập mã danh mục muốn xóa:");
@@ -61,7 +66,7 @@ public class CategoryManagement {
         System.out.println("Nhập mã danh muc:");
         int idUpdate = FeatureAll.inputNumber(sc);
         int indexUpdate = categoryFeature.findIndexById(idUpdate);
-        if(indexUpdate >= 0){
+        if (indexUpdate >= 0) {
             Category categoryUpdate = CategoryImpl.categoryList.get(indexUpdate);
             boolean isExit = true;
             do {
@@ -94,12 +99,12 @@ public class CategoryManagement {
                         isExit = false;
                         break;
                     default:
-                    System.err.println("Lựa chọn từ 1 -> 4, vui lòng nhập lại!");
+                        System.err.println("Lựa chọn từ 1 -> 4, vui lòng nhập lại!");
                 }
                 categoryFeature.addOrUpdate(categoryUpdate);
-            }while (isExit);
-        }else {
-            System.err.println("Không tìm thấy mã danh mục " +indexUpdate);
+            } while (isExit);
+        } else {
+            System.err.println("Không tìm thấy mã danh mục " + indexUpdate);
         }
     }
 
@@ -121,5 +126,7 @@ public class CategoryManagement {
         for (Category c : categoryFeature.findAll()) {
             c.displayCategory();
         }
+        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println();
     }
 }

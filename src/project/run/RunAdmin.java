@@ -10,7 +10,10 @@ public class RunAdmin {
         Users users = new Users();
         users.setFullName("ADMIN");
         users.setEmail("admin");
+        users.setUserName("admin");
         users.setPassword("admin");
+        users.setConfirmPassword("admin");
+        users.setPhone("1111");
         users.setRoleName(RoleName.ROLE_ADMIN);
         UserImpl.users.add(users);
         IOFile.writeToFile(IOFile.PATH_USER,UserImpl.users);

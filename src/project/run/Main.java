@@ -14,6 +14,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Main {
+    public  static GeneralProduct generalPro = new GeneralProduct();
+    public static Users userLogin = null;
+
     static IUserFeature userFeature = new UserImpl();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,7 +29,7 @@ public class Main {
             System.out.println(topColor);
             System.out.println(rowColor + "" + borderColor + "     1. Đăng ký                                                   " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     2. Đăng nhập                                                 " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     3. Hiển thị sản phẩm được bán                                " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     3. Thông tin về sản phẩm                                     " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     4. Quên mật khẩu                                             " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     5. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
@@ -40,7 +43,7 @@ public class Main {
                     handleLogin(sc);
                     break;
                 case 3:
-
+                    generalPro.generalProductMenu(sc);
                     break;
                 case 4:
                     forgetPass(sc);
@@ -94,16 +97,20 @@ public class Main {
             System.err.println("Email và password không đúng!");
             return;
         }
+        userLogin = user;
         //check quyền
         if (user.getRoleName().equals(RoleName.ROLE_ADMIN)) {
             MenuAdmin menuAdmin = new MenuAdmin();
             menuAdmin.menuAdmin(sc);
+            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         } else if (user.getRoleName().equals(RoleName.ROLE_MODERATOR)) {
             MenuModerator menuModerator = new MenuModerator();
             menuModerator.menuModerator(sc);
+            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         } else {
             MenuUsers menuUser = new MenuUsers();
             menuUser.menuUsers(sc);
+            System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
         }
     }
 }

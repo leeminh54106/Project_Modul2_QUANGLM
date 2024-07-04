@@ -18,15 +18,15 @@ public class ProductManagement {
             String borderColor = Color.PURPLE;
             String bottomColor = borderColor + "╚══════════════════════════════════════════════════════════════════╝" + Color.RESET;
             String rowColor = borderColor + "║" + Color.RESET;
-            String topColor = borderColor + "╔════════════════════════════ PRODUCT ════════════════════════════╗" + Color.RESET;
+            String topColor = borderColor + "╔════════════════════════════ PRODUCT ═════════════════════════════╗" + Color.RESET;
 
             System.out.println(topColor);
-            System.out.println(rowColor + "" + borderColor + "     1. Hiển thị danh sách sản phẩm                              " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     2. Thêm mới sản phẩm                                        " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     3. Cập nhật sản phẩm                                        " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     4. Xóa sản phẩm                                             " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     5. Tìm sản phẩm theo mã sản phẩm                            " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     6. Thoát                                                    " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     1. Hiển thị danh sách sản phẩm                               " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     2. Thêm mới sản phẩm                                         " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     3. Cập nhật sản phẩm                                         " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     4. Xóa sản phẩm                                              " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     5. Tìm sản phẩm theo mã sản phẩm                             " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     6. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
 
             System.out.println(Color.PURPLE + "Lựa chọn của bạn:" + Color.RESET);
@@ -70,6 +70,8 @@ public class ProductManagement {
                 isExist = true;
             }
         }
+        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println();
         if(!isExist){
             System.err.println("Không tìm thấy sản phẩm có mã " +number);
         }
@@ -103,13 +105,13 @@ public class ProductManagement {
                 int choice = FeatureAll.inputNumber(sc);
                 switch (choice) {
                     case 1:
-                        productUpdate.setProductName(sc.nextLine());
+                        productUpdate.setProductName(productUpdate.inputProductName(sc));
                         break;
                     case 2:
-                        productUpdate.setDescription(sc.nextLine());
+                        productUpdate.setDescription(productUpdate.inputDescription(sc));
                         break;
                     case 3:
-                        productUpdate.setPrice(Float.parseFloat(sc.nextLine()));
+                        productUpdate.setPrice(productUpdate.inputPrice(sc));
                         break;
                     case 4:
                         isExist = false;
@@ -144,5 +146,7 @@ public class ProductManagement {
         for (Product p : productFeature.findAll()) {
             p.displayProduct();
         }
+        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+
     }
 }

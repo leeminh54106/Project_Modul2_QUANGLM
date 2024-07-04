@@ -12,10 +12,17 @@ import java.util.Optional;
 public class UserImpl implements IUserFeature {
 
     public static List<Users> users = new ArrayList<>();
+    static {
+        users = IOFile.readFromFile(IOFile.PATH_USER);
+    }
 
     //đọc (IOFile)
     public UserImpl() {
-        users = IOFile.readFromFile(IOFile.PATH_USER);
+        List<Users> user = IOFile.readFromFile(IOFile.PATH_USER);
+        if(user == null){
+            users = new ArrayList<>();
+        }
+        users = user;
     }
 
     @Override

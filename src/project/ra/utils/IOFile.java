@@ -8,6 +8,7 @@ public class IOFile {
     public static final String PATH_USER = "src/project/ra/data/users.txt";
     public static final String PATH_CATEGORY = "src/project/ra/data/category.txt";
     public static final String PATH_PRODUCT = "src/project/ra/data/product.txt";
+    public static final String PATH_ADDRESS = "src/project/ra/data/address.txt";
 
 
     public static <T> void writeToFile(String path, List<T> list) {

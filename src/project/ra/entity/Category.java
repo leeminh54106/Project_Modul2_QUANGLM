@@ -1,6 +1,7 @@
 package project.ra.entity;
 
 import project.ra.feature.impl.CategoryImpl;
+import project.ra.utils.Color;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -70,12 +71,12 @@ public class Category implements Serializable {
         System.out.println("Nhập trạng thái danh mục:");
         do {
             String status = sc.nextLine().toLowerCase();
-            if(status.equals("true") || status.equals("false")) {
+            if (status.equals("true") || status.equals("false")) {
                 return Boolean.parseBoolean(status);
-            }else {
+            } else {
                 System.err.println("Chỉ nhận true or false");
             }
-        }while (true);
+        } while (true);
     }
 
 
@@ -83,23 +84,23 @@ public class Category implements Serializable {
         System.out.println("Nhập tên danh mục:");
         do {
             String cateName = sc.nextLine();
-            if(cateName.trim().isEmpty()){
+            if (cateName.trim().isEmpty()) {
                 System.err.println("Không được để trống!");
-            }else {
+            } else {
                 boolean isExist = false;
-                for(Category ca:CategoryImpl.categoryList){
-                    if(ca.getCategoryName().equals(cateName)){
+                for (Category ca : CategoryImpl.categoryList) {
+                    if (ca.getCategoryName().equals(cateName)) {
                         isExist = true;
                         break;
                     }
                 }
-                if(isExist){
+                if (isExist) {
                     System.err.println("Tên danh mục đã tồn tại,vui lòng nhập lại!");
-                }else {
+                } else {
                     return cateName;
                 }
             }
-        }while (true);
+        } while (true);
     }
 
     public int autoCategoryId() {
@@ -113,10 +114,12 @@ public class Category implements Serializable {
     }
 
     public void displayCategory() {
+        String borderColor = Color.BLUE;
+        String rowColor = borderColor + "|";
+        String colColor = borderColor + "+------------------------+------------------------------+--------------------------------------+---------------------------------+";
+        System.out.println(colColor);
+        System.out.printf(rowColor + " Mã danh mục: %-10d| Tên danh mục: %-15s| Mô tả: %-30s| Trạng thái: %-20s|\n",
+                this.categoryId, this.categoryName, this.description, this.status ? "Active" : "Inactive");
 
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
-        System.out.printf("║ Mã danh mục: %-5d║ Tên danh mục: %-10s║ Mô tả: %-10s║ Trạng thái: %-10s\n",
-                this.categoryId, this.categoryName, this.description, this.status ? "ActiveFalse":"Inactive");
-        System.out.println("════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
     }
 }
