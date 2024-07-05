@@ -1,4 +1,4 @@
-package project.run;
+package project.run.managements;
 
 import project.ra.entity.Category;
 import project.ra.entity.Product;
@@ -9,7 +9,6 @@ import project.ra.feature.impl.FeatureAll;
 import project.ra.feature.impl.ProductImpl;
 import project.ra.utils.Color;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -69,7 +68,7 @@ public class GeneralProduct {
         for(Product p : productFeatuer.findAll()){
             p.displayProduct();
         }
-        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
         System.out.println();
     }
 
@@ -85,7 +84,7 @@ public class GeneralProduct {
             if(p.getProductName().toLowerCase().contains(input.toLowerCase()) || p.getDescription().toLowerCase().contains(input.toLowerCase())) {
                 p.displayProduct();
                 isExist = true;
-                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
                 System.out.println();
             }
         }
@@ -99,7 +98,7 @@ public class GeneralProduct {
         for (Product p : ProductImpl.productList) {
             p.displayProduct();
         }
-        System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
         System.out.println();
     }
 
@@ -121,7 +120,7 @@ public class GeneralProduct {
         for (Product p : productFeatuer.findAll()) {
             if (p.getCategory().getCategoryId() == number) {
                 p.displayProduct();
-                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
                 System.out.println();
                 return;
             }
@@ -137,7 +136,7 @@ public class GeneralProduct {
             if (p.getProductId() == number) {
                 p.displayProduct();
                 isExist = true;
-                System.out.println("+------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
                 System.out.println();
                 break;
             }

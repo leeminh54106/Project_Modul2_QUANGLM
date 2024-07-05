@@ -253,11 +253,11 @@ public class Product implements Serializable {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String borderColor = Color.BLUE;
-        String colColor = borderColor + "+------------------------+------------------------------+--------------------------------------+---------------------------------+";
+        String colColor = borderColor + "+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+";
         System.out.println(colColor);
-        System.out.printf("| Mã sản phẩm: %-10d| Tên sản phẩm: %-15s| Mô tả: %-30s| Danh mục: %-22s|\n",
+        System.out.printf("| Mã sản phẩm: %-32d| Tên sản phẩm: %-15s| Mô tả: %-30s| Danh mục: %-22s|\n",
                 this.productId, this.productName, this.description, this.category.getCategoryName());
-        System.out.printf("|                        | Tồn kho: %-20d| Thời gian: %-26s| Giá: %-27.0f|\n",
-                this.quantity, sdf.format(this.created), this.price);
+        System.out.printf("| SKU: %-40s| Tồn kho: %-20d| Thời gian: %-26s| Giá: %-27.0f|\n",
+                this.sku,this.quantity, sdf.format(this.created), this.price);
     }
 }

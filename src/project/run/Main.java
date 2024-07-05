@@ -7,12 +7,12 @@ import project.ra.feature.impl.FeatureAll;
 import project.ra.feature.impl.UserImpl;
 import project.ra.utils.Color;
 import project.ra.utils.IOFile;
+import project.run.managements.GeneralProduct;
 import project.run.menu.MenuAdmin;
 import project.run.menu.MenuModerator;
 import project.run.menu.MenuUsers;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
     public  static GeneralProduct generalPro = new GeneralProduct();
