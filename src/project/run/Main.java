@@ -15,10 +15,11 @@ import project.run.menu.MenuUsers;
 import java.util.Scanner;
 
 public class Main {
-    public  static GeneralProduct generalPro = new GeneralProduct();
+    public static GeneralProduct generalPro = new GeneralProduct();
     public static Users userLogin = null;
 
     static IUserFeature userFeature = new UserImpl();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         do {
@@ -64,18 +65,19 @@ public class Main {
         System.out.println("Nhập email để tìm lại mật khẩu:");
         String email = sc.nextLine();
         boolean isExit = false;
-        for (Users u:UserImpl.users){
+        for (Users u : UserImpl.users) {
             if (u.getEmail().equals(email) && !u.getRoleName().equals(RoleName.ROLE_ADMIN)) {
                 u.setPassword(u.inputPass(sc));
-                u.inputConfirmPass(sc,u.getPassword());
+                u.inputConfirmPass(sc, u.getPassword());
                 userFeature.addOrUpdate(u);
+                System.out.println(Color.GREEN + "Cập nhật mật khẩu thành công!" + Color.RESET);
                 isExit = true;
                 break;
             }
         }
         // cập nhât lại IOFile và chuyền vào users
         IOFile.writeToFile(IOFile.PATH_USER, UserImpl.users);
-        if(!isExit){
+        if (!isExit) {
             System.err.println("email không đúng!");
         }
         return null;
@@ -100,7 +102,7 @@ public class Main {
             System.err.println("Email và password không đúng!");
             return;
         }
-        System.out.println(Color.GREEN + "Đăng nhập thành công!" +Color.RESET);
+        System.out.println(Color.GREEN + "Đăng nhập thành công!" + Color.RESET);
         System.out.println();
         userLogin = user;
         //check quyền

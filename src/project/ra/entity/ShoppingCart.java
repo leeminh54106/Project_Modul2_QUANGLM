@@ -2,6 +2,7 @@ package project.ra.entity;
 
 import project.ra.feature.impl.FeatureAll;
 import project.ra.feature.impl.ShoppingCartImpl;
+import project.ra.utils.Color;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -75,6 +76,8 @@ public class ShoppingCart implements Serializable {
             } else {
                 if(number <= product.getQuantity()){
                     return number;
+                }else {
+                    System.err.println("Số lượng sản phẩm trong kho không đủ, vui lòng nhập lại!");
                 }
             }
         } while (true);
@@ -90,9 +93,8 @@ public class ShoppingCart implements Serializable {
         return max + 1;
     }
     public void displayShoppingCart() {
-        System.out.println("---------------------------------------------------------------------------------");
-        System.out.printf("|mã giỏ hàng: %-10d, sản phẩm: %-20s, số lượng: %-10d|\n",
+        System.out.println(Color.CYAN+"+-----------------------+-------------------------------+---------------------+");
+        System.out.printf("|Mã giỏ hàng: %-10d| Sản phẩm: %-20s| Số lượng: %-10d|\n",
                 this.shoppingCartId,this.product.getProductName(),this.orderQuantity);
-        System.out.println("---------------------------------------------------------------------------------");
     }
 }

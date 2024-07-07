@@ -28,7 +28,7 @@ public class MenuAdmin {
             System.out.println(rowColor + "" + borderColor + "     3. Tìm kiếm người dùng theo tên                              " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     4. Lấy về danh sách quyền                                    " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     5. Lấy ra danh sách người dùng                               " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     7. Đăng xuất                                                 " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     6. Đăng xuất                                                 " + rowColor);
             System.out.println(bottomColor);
             System.out.println(Color.PURPLE + "Lựa chọn của bạn : " + Color.RESET);
             int choice = FeatureAll.inputNumber(sc);
@@ -49,9 +49,6 @@ public class MenuAdmin {
                     showUserList();
                     break;
                 case 6:
-
-                    break;
-                case 7:
                     quit = false;
                     break;
                 default:
@@ -72,6 +69,7 @@ public class MenuAdmin {
             u.displayUser();
         }
         System.out.println(Color.CYAN + "+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+"+Color.RESET);
+        System.out.println();
     }
 
     private void showRole() {
@@ -94,10 +92,11 @@ public class MenuAdmin {
                 found = true;
             }
         }
-        System.out.println("+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+"+Color.RESET);
         if (!found) {
-            System.out.println("Không tìm thấy người dùng " + userName);
+            System.err.println("Không tìm thấy người dùng " + userName);
         }
+        System.out.println("+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+"+Color.RESET);
+        System.out.println();
     }
 }
 

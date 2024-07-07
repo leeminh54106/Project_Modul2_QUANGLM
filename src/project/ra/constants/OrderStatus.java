@@ -1,6 +1,6 @@
 package project.ra.constants;
 
-public enum OderStatus {
+public enum OrderStatus {
     WAITING,
     CONFIRM,
     DELIVERY,

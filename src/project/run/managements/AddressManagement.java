@@ -13,8 +13,9 @@ import java.util.*;
 
 public class AddressManagement {
     public static IAddress addressFeature = new AddressImpl();
-    public static void addressMenu(Scanner sc){
-        boolean quit = false;
+
+    public static void addressMenu(Scanner sc) {
+        boolean quit = true;
         do {
             String borderColor = Color.PURPLE;
             String bottomColor = borderColor + "╚══════════════════════════════════════════════════════════════════╝" + Color.RESET;
@@ -44,13 +45,13 @@ public class AddressManagement {
                     deleteAddress(sc);
                     break;
                 case 5:
-                    quit = true;
+                    quit = false;
                     break;
                 default:
                     System.err.println("Lựa chọn từ 1 -> 5, vui lòng nhập lại!");
             }
 
-        }while (quit);
+        } while (quit);
     }
 
     private static void deleteAddress(Scanner sc) {
@@ -58,13 +59,13 @@ public class AddressManagement {
         Users user = Main.userLogin;
         System.out.println("Nhập mã địa chỉ muốn xóa:");
         int number = FeatureAll.inputNumber(sc);
-        for(Address ad:addressFeature.findAll()){
-            if (ad.getAddressId() == number && ad.getUsers().getId() == user.getId()){
+        for (Address ad : addressFeature.findAll()) {
+            if (ad.getAddressId() == number && ad.getUsers().getId() == user.getId()) {
                 addressFeature.findAll().remove(ad);
                 break;
             }
         }
-        System.out.println("Xóa thành công!");
+        System.out.println(Color.GREEN + "Xóa thành công!" + Color.RESET);
 //        Map<Integer,Integer> numberId = new HashMap<Integer,Integer>();
 //        List<Address> addressList = addressFeature.findAll();
 //        for(int i = 0; i <addressFeature.findAll().size();i++){
@@ -83,22 +84,22 @@ public class AddressManagement {
 //            }
 //        }
 
-        IOFile.writeToFile(IOFile.PATH_ADDRESS,AddressImpl.addressList);
+        IOFile.writeToFile(IOFile.PATH_ADDRESS, AddressImpl.addressList);
     }
 
     private static void showAllAddress() {
         //dùng user đăng nhập để sét
         Users user = Main.userLogin;
-        if(user == null){
-            System.err.println("Không có địa chỉ nào cả!");
+        if (user == null) {
+            System.err.println("Cần đăng nhập!");
             return;
         }
-        for(Address ad:addressFeature.findAll()){
-            if(ad.getUsers().getId() == user.getId()){
+        for (Address ad : addressFeature.findAll()) {
+            if (ad.getUsers().getId() == user.getId()) {
                 ad.displayAddress();
             }
         }
-        System.out.println("+------------------------+------------------------------------------+---------------------------------------------------------+" +Color.RESET);
+        System.out.println("+------------------------+------------------------------------------+---------------------------------------------------------+" + Color.RESET);
         System.out.println();
     }
 
@@ -106,15 +107,15 @@ public class AddressManagement {
         System.out.println("Nhập mã địa chỉ:");
         int number = FeatureAll.inputNumber(sc);
         boolean isExist = false;
-        for(Address ad:addressFeature.findAll()){
-            if(ad.getAddressId() == number && ad.getUsers().getId() == Main.userLogin.getId()){
+        for (Address ad : addressFeature.findAll()) {
+            if (ad.getAddressId() == number && ad.getUsers().getId() == Main.userLogin.getId()) {
                 ad.displayAddress();
                 isExist = true;
             }
         }
-        System.out.println("+------------------------+------------------------------------------+---------------------------------------------------------+" +Color.RESET);
+        System.out.println("+------------------------+------------------------------------------+---------------------------------------------------------+" + Color.RESET);
         System.out.println();
-        if(!isExist){
+        if (!isExist) {
             System.err.println("Mã địa chỉ không đúng!");
         }
     }
@@ -126,11 +127,11 @@ public class AddressManagement {
         int number = FeatureAll.inputNumber(sc);
         for (int i = 0; i < number; i++) {
             Address newAddress = new Address();
-            newAddress.inputDataAddress(sc,user);
+            newAddress.inputDataAddress(sc, user);
             addressFeature.addOrUpdate(newAddress);
         }
+        System.out.println(Color.GREEN + "Thêm mới địa chỉ thành công!" + Color.RESET);
     }
-
 
 
 }

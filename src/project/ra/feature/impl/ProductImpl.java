@@ -26,8 +26,10 @@ public class ProductImpl implements IProduct {
         int index = findIndexById(product.getProductId());
         if (index >= 0) {
             productList.set(index, product);
+            System.out.println(Color.GREEN+"Cập nhật thành công!"+Color.RESET);
         } else {
             productList.add(product);
+            System.out.println(Color.GREEN+"Thêm mới thành công!"+Color.RESET);
         }
         IOFile.writeToFile(IOFile.PATH_PRODUCT,productList);
     }
@@ -37,7 +39,7 @@ public class ProductImpl implements IProduct {
         int index = findIndexById(id);
         if (index >= 0) {
             productList.remove(index);
-            System.out.println(Color.YELLOW + "Xóa sản phẩm thành công!" + Color.RESET);
+            System.out.println(Color.GREEN + "Xóa sản phẩm thành công!" + Color.RESET);
         } else {
             System.err.println("Mã sản phẩm không tồn tại!");
         }

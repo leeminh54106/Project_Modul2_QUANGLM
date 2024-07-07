@@ -25,6 +25,7 @@ public class ShoppingCartImpl implements IShoppingCart {
     public void addOrUpdate(ShoppingCart shoppingCart) {
         int index = findIndexById(shoppingCart.getShoppingCartId());
         if (index >= 0) {
+            //thieu cong so luong moi vao cu
             shoppingCartList.set(index, shoppingCart);
         } else {
             shoppingCartList.add(shoppingCart);

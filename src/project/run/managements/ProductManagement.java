@@ -70,7 +70,7 @@ public class ProductManagement {
                 isExist = true;
             }
         }
-        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println(Color.BLUE +"+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
         if(!isExist){
             System.err.println("Không tìm thấy sản phẩm có mã " +number);
@@ -146,7 +146,8 @@ public class ProductManagement {
         for (Product p : productFeature.findAll()) {
             p.displayProduct();
         }
-        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println(Color.BLUE +"+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println();
 
     }
 }

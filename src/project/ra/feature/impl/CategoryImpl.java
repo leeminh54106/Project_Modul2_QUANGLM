@@ -27,8 +27,10 @@ public class CategoryImpl implements ICategory {
         int index = findIndexById(category.getCategoryId());
         if (index >= 0) {
             categoryList.set(index, category);
+            System.out.println(Color.GREEN+"Cập nhật thành công!"+Color.RESET);
         } else {
             categoryList.add(category);
+            System.out.println(Color.GREEN+"Thêm mới thành công!"+Color.RESET);
         }
     IOFile.writeToFile(IOFile.PATH_CATEGORY,categoryList);
     }
@@ -46,7 +48,7 @@ public class CategoryImpl implements ICategory {
             }
             if (isExist) {
                 categoryList.remove(index);
-                System.out.println(Color.YELLOW + "Xóa danh mục thành công!" + Color.RESET);
+                System.out.println(Color.GREEN + "Xóa danh mục thành công!" + Color.RESET);
             } else {
                 Category category = categoryList.get(index);
                 category.setStatus(!category.getStatus());
