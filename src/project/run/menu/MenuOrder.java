@@ -14,10 +14,9 @@ import project.run.managements.CartManagement;
 import java.util.Scanner;
 
 public class MenuOrder {
-    Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+
+    public static void orderMenu(Scanner sc) {
         boolean quit = true;
         do {
             String borderColor = Color.PURPLE;
@@ -28,9 +27,7 @@ public class MenuOrder {
             System.out.println(topColor);
             System.out.println(rowColor + "" + borderColor + "     1. lấy ra danh sách lịch sử mua hàng                         " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     2. Lấy ra danh sách lịch sử đơn hàng theo trạng thái đơn hàng" + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     3.                                                           " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     4.                                                           " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     5. Đăng xuất                                                 " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     3. Đăng xuất                                                 " + rowColor);
             System.out.println(bottomColor);
 
             System.out.println(Color.PURPLE + "Lựa chọn của bạn : " + Color.RESET);
@@ -43,50 +40,42 @@ public class MenuOrder {
                     showStatusBought(sc);
                     break;
                 case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
                     quit = false;
                     break;
                 default:
-                    System.err.println("Vui lòng nhập lại từ 1 -> 4!");
+                    System.err.println("Vui lòng nhập lại từ 1 -> 3!");
             }
         } while (quit);
-
     }
 
+    //hiển thị theo trạng thái
     private static void showStatusBought(Scanner sc) {
         System.out.println("Nhập 1 trong các trạng thái sau: ");
         System.out.println("WAITING,CONFIRM,DELIVERY,SUCCESS,CANCEL,DENIED");
         OrderStatus orderStatus;
         do {
-            try{
-               orderStatus = OrderStatus.valueOf(sc.nextLine());
-               break;
-            }catch (Exception e) {
+            try {
+                orderStatus = OrderStatus.valueOf(sc.nextLine());
+                break;
+            } catch (Exception e) {
                 System.err.println("Vui nòng nhập đúng định dạng!");
             }
 
         } while (true);
         boolean isExit = false;
-        for (Order o:OrderImpl.orderList){
-            if(o.getStatus().equals(orderStatus)){
+        for (Order o : OrderImpl.orderList) {
+            if (o.getStatus().equals(orderStatus)) {
                 o.displayOrder();
                 isExit = true;
             }
         }
-        if(!isExit){
+        if (!isExit) {
             System.err.println("Không tìm thấy đơn hàng có trạng thái là " + orderStatus);
         }
     }
 
+    //hiển thị tất cả order đã mua
     private static void showHistoryBought(Scanner sc) {
-        //dùng user đăng nhập để sét
-//       Users users1 = new Users();
         for (Order o : OrderImpl.orderList) {
             o.displayOrder();
         }

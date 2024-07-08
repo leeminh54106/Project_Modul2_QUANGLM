@@ -65,7 +65,7 @@ public class Address implements Serializable {
         this.users = users;
     }
 
-    public void inputDataAddress(Scanner sc,Users users) {
+    public void inputDataAddress(Scanner sc, Users users) {
         this.addressId = autoAddressId();
         this.users = users;
         this.fullAddress = inputFullAddress(sc);
@@ -81,14 +81,14 @@ public class Address implements Serializable {
     private String inputPhoneAddress(Scanner sc) {
         String regex = "(0)\\d{9}";
         System.out.println("Nhập số điện thoại:");
-       do {
-           String input = sc.nextLine();
-           if(Pattern.matches(regex,input)){
-               return input;
-           }else {
-               System.err.println("Số điện thoại phải có 10 ký tự số, bắt đầu từ 0!");
-           }
-       }while (true);
+        do {
+            String input = sc.nextLine();
+            if (Pattern.matches(regex, input)) {
+                return input;
+            } else {
+                System.err.println("Số điện thoại phải có 10 ký tự số, bắt đầu từ 0!");
+            }
+        } while (true);
     }
 
     public String inputFullAddress(Scanner sc) {
@@ -106,12 +106,13 @@ public class Address implements Serializable {
         }
         return max + 1;
     }
+
     public void displayAddress() {
-        System.out.println(Color.CYAN +"+------------------------+------------------------------------------+---------------------------------------------------------+");
+        System.out.println(Color.CYAN + "+------------------------+------------------------------------------+---------------------------------------------------------+");
         System.out.printf("| Mã địa chỉ: %-11d| Tài khoản: %-30s| Địa chỉ đầy đủ: %-40s|\n",
-               this.addressId,this.users.getUserName(),this.fullAddress);
+                this.addressId, this.users.getUserName(), this.fullAddress);
         System.out.printf("|                        | Tên người nhận: %-25s| Số điện thoại: %-41s|\n",
-                this.receiveName,this.phone);
+                this.receiveName, this.phone);
 
     }
 }

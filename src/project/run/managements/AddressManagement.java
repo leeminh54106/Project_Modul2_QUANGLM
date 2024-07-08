@@ -53,56 +53,40 @@ public class AddressManagement {
 
         } while (quit);
     }
+    //dùng user đăng nhập để sét
+    static Users user = Main.userLogin;
 
+    //xóa 1 địa chỉ
     private static void deleteAddress(Scanner sc) {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
+
         System.out.println("Nhập mã địa chỉ muốn xóa:");
         int number = FeatureAll.inputNumber(sc);
-        for (Address ad : addressFeature.findAll()) {
-            if (ad.getAddressId() == number && ad.getUsers().getId() == user.getId()) {
-                addressFeature.findAll().remove(ad);
-                break;
-            }
-        }
-        System.out.println(Color.GREEN + "Xóa thành công!" + Color.RESET);
-//        Map<Integer,Integer> numberId = new HashMap<Integer,Integer>();
-//        List<Address> addressList = addressFeature.findAll();
-//        for(int i = 0; i <addressFeature.findAll().size();i++){
-//            Address ad = addressList.get(i);
-//            if(ad.getAddressId() == user.getId()){
-//                numberId.put(i, ad.getAddressId());
-//            }
-//        }
-//        System.out.println("Nhập mã địa chỉ muốn xóa:");
-//        int number = FeatureAll.inputNumber(sc);
-//        for(Map.Entry<Integer,Integer> address : numberId.entrySet()){
-//            if(address.getValue() == number){
-//                AddressImpl.addressList.remove(address.getKey());
-//                System.out.println("Đã xóa thành công!");
+        addressFeature.findAll().removeIf(item -> item.getAddressId() == number && item.getUsers().getId() == user.getId());
+//        for (Address ad : addressFeature.findAll()) {
+//            if (ad.getAddressId() == number && ad.getUsers().getId() == user.getId()) {
+//                addressFeature.findAll().remove(ad);
 //                break;
 //            }
 //        }
-
+        System.out.println(Color.GREEN + "Xóa thành công!" + Color.RESET);
         IOFile.writeToFile(IOFile.PATH_ADDRESS, AddressImpl.addressList);
     }
-
+    //lấy tất cả danh sách
     private static void showAllAddress() {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
         if (user == null) {
             System.err.println("Cần đăng nhập!");
             return;
         }
-        for (Address ad : addressFeature.findAll()) {
-            if (ad.getUsers().getId() == user.getId()) {
-                ad.displayAddress();
-            }
-        }
+        addressFeature.findAll().stream().filter(item -> item.getUsers().getId() == user.getId()).forEach(Address::displayAddress);
+//        for (Address ad : addressFeature.findAll()) {
+//            if (ad.getUsers().getId() == user.getId()) {
+//                ad.displayAddress();
+//            }
+//        }
         System.out.println("+------------------------+------------------------------------------+---------------------------------------------------------+" + Color.RESET);
         System.out.println();
     }
-
+    //hiển thị địa chỉ theo mã địa chỉ
     private static void showAddressById(Scanner sc) {
         System.out.println("Nhập mã địa chỉ:");
         int number = FeatureAll.inputNumber(sc);
@@ -119,10 +103,9 @@ public class AddressManagement {
             System.err.println("Mã địa chỉ không đúng!");
         }
     }
-
+    //Thêm mới địa chỉ
     private static void addAddress(Scanner sc) {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
+
         System.out.println("Nhập số lượng địa chỉ muốn thêm:");
         int number = FeatureAll.inputNumber(sc);
         for (int i = 0; i < number; i++) {

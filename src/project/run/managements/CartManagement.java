@@ -11,6 +11,8 @@ import project.ra.utils.Color;
 import project.ra.utils.IOFile;
 import project.run.Main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CartManagement {
@@ -60,48 +62,62 @@ public class CartManagement {
         } while (quit);
     }
 
+    //dùng user đăng nhập để sét
+    static Users user = Main.userLogin;
 
+    //Xóa tất cả giỏ hàng
     private static void deleteCart(Scanner sc) {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
-
-        ShoppingCartImpl.shoppingCartList = cartFeature.findAll().stream().filter(item -> item.getUsers().getId() != user.getId()).toList();
+        //mảng mới không chứa sản phẩm của giỏ hàng đang đăng nhập
+        List<ShoppingCart> newCarts = new ArrayList<>();
+        for (ShoppingCart ca : cartFeature.findAll()) {
+            if (ca.getUsers().getId() != user.getId()) {
+                newCarts.add(ca);
+            }
+        }
+//        ShoppingCartImpl.shoppingCartList = cartFeature.findAll().stream().filter(item -> item.getUsers().getId() != user.getId()).toList();
+        System.out.println(Color.GREEN + "Đã xóa toàn bộ sản phẩm trong giỏ hàng!" + Color.RESET);
         IOFile.writeToFile(IOFile.PATH_SHOPPINGCART, ShoppingCartImpl.shoppingCartList);
     }
 
+    //xóa 1 sản phẩm
     private static void deleteOneProduct(Scanner sc) {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
         System.out.println("Nhập vào mã sản phẩm muốn xóa:");
         int number = FeatureAll.inputNumber(sc);
-        boolean isExist = false;
-        for (ShoppingCart shop : cartFeature.findAll()) {
-            if (shop.getShoppingCartId() == number && shop.getUsers().getId() == user.getId()) {
-                cartFeature.findAll().remove(shop);
-                isExist = true;
-                break;
-            }
-        }
+        boolean isExist = cartFeature.findAll().stream().anyMatch(shop -> shop.getShoppingCartId() == number && shop.getUsers().getId() == user.getId());
         if(isExist){
-            System.out.println("xóa sản phẩm thành công!");
+            cartFeature.findAll().removeIf(shop -> shop.getShoppingCartId() == number && shop.getUsers().getId() == user.getId());
+            System.out.println(Color.GREEN + "xóa sản phẩm thành công!" + Color.RESET);
         }else {
             System.err.println("Mã sản phẩm không có trong giỏ hàng!");
         }
+//        boolean isExist = false;
+//        for (ShoppingCart shop : cartFeature.findAll()) {
+//            if (shop.getShoppingCartId() == number && shop.getUsers().getId() == user.getId()) {
+//                cartFeature.findAll().remove(shop);
+//                isExist = true;
+//                break;
+//            }
+//        }
+//        if (isExist) {
+//            System.out.println(Color.GREEN + "xóa sản phẩm thành công!" + Color.RESET);
+//        } else {
+//            System.err.println("Mã sản phẩm không có trong giỏ hàng!");
+//        }
         IOFile.writeToFile(IOFile.PATH_SHOPPINGCART, ShoppingCartImpl.shoppingCartList);
     }
 
+    //Thêm sản phẩm vào giỏ hàng
     private static void addProductToCart(Scanner sc) {
         for (Product pro : ProductImpl.productList) {
             System.out.println(Color.CYAN + "+------------------------+----------------------------------+---------------------------+---------------------+");
             System.out.printf("| Mã sản phẩm: %-10d| Tên sản phẩm %-20s| Giá:  %-20.2f| Số lượng: %-10d|\n", pro.getProductId(), pro.getProductName(), pro.getPrice(), pro.getQuantity());
         }
         System.out.println("+------------------------+----------------------------------+---------------------------+---------------------+" + Color.RESET);
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
+
+        //tìm mã sản phẩm
         Product adProduct = null;
         System.out.println("Nhập mã sản phẩm:");
         int number = FeatureAll.inputNumber(sc);
-
         boolean isExist = false;
         for (Product pro : ProductImpl.productList) {
             if (pro.getProductId() == number) {
@@ -119,16 +135,18 @@ public class CartManagement {
                     cartItem = shop;
                 }
             }
+            //Giỏ hàng không có sản phẩm
             if (cartItem == null) {
                 cartItem = new ShoppingCart();
                 cartItem.inputShoppingCart(sc, user, adProduct);
                 ShoppingCartImpl.shoppingCartList.add(cartItem);
             } else {
+                //Giỏ hàng có sản phẩm
                 System.out.println("Nhập vào số lượng bạn muốn thêm:");
                 int number2 = FeatureAll.inputNumber(sc);
                 if (cartItem.getOrderQuantity() + number2 <= adProduct.getQuantity()) {
                     cartItem.setOrderQuantity(cartItem.getOrderQuantity() + number2);
-                    System.out.println(Color.GREEN+"Thêm số lượng thành công!"+Color.RESET);
+                    System.out.println(Color.GREEN + "Thêm số lượng thành công!" + Color.RESET);
                 } else {
                     System.err.println("Vượt quá số lượng trong kho!");
                 }
@@ -137,9 +155,8 @@ public class CartManagement {
         IOFile.writeToFile(IOFile.PATH_SHOPPINGCART, ShoppingCartImpl.shoppingCartList);
     }
 
+    //hiển thị giỏ hàng
     private static void showShoppingCart() {
-
-        Users user = Main.userLogin;
         if (user == null) {
             System.err.println("Vui lòng đăng nhập để xem giỏ hàng!");
             return;
@@ -148,13 +165,14 @@ public class CartManagement {
             System.err.println("Giỏ hàng trống!");
             return;
         }
-        for (ShoppingCart shop : cartFeature.findAll()) {
-            if (shop.getUsers().getId() == user.getId()) {
-                shop.displayShoppingCart();
-            }
-
-        }
-        System.out.println("+-----------------------+-------------------------------+---------------------+"+Color.RESET);
+        cartFeature.findAll().stream().filter(item -> item.getUsers().getId() == user.getId()).forEach(ShoppingCart::displayShoppingCart);
+//        for (ShoppingCart shop : cartFeature.findAll()) {
+//            if (shop.getUsers().getId() == user.getId()) {
+//                shop.displayShoppingCart();
+//            }
+//
+//        }
+        System.out.println("+-----------------------+-------------------------------+---------------------+" + Color.RESET);
         System.out.println();
 
     }

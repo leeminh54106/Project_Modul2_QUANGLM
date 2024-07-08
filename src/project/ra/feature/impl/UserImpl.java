@@ -12,6 +12,7 @@ import java.util.Optional;
 public class UserImpl implements IUserFeature {
 
     public static List<Users> users = new ArrayList<>();
+
     static {
         users = IOFile.readFromFile(IOFile.PATH_USER);
     }
@@ -19,7 +20,7 @@ public class UserImpl implements IUserFeature {
     //đọc (IOFile)
     public UserImpl() {
         List<Users> user = IOFile.readFromFile(IOFile.PATH_USER);
-        if(user == null){
+        if (user == null) {
             users = new ArrayList<>();
         }
         users = user;
@@ -49,7 +50,7 @@ public class UserImpl implements IUserFeature {
         int index = findIndexById(users.getId());
         if (index >= 0) {
             this.users.set(index, users);
-        }else {
+        } else {
             this.users.add(users);
         }
 

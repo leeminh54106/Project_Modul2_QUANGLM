@@ -67,9 +67,10 @@ public class OrderDetail {
         this.unitPrice = shoppingCart.getProduct().getPrice();
         this.quantity = shoppingCart.getOrderQuantity();
     }
+
     public void displayOrderDetail() {
         System.out.println("------------------------------------------------------------------------------------------");
         System.out.printf("Mã đơn hàng %-5d| mã sản phẩm %-5d| Tên sản phẩm: %-20s| Giá: %-10.0f| Số lượng: %-100d|\n",
-                this.order.getOrderId(),this.product.getProductId(),this.name,this.unitPrice,this.quantity);
+                this.order.getOrderId(), this.product.getProductId(), this.name, this.unitPrice, this.quantity);
     }
 }

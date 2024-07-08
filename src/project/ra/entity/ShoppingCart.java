@@ -63,7 +63,7 @@ public class ShoppingCart implements Serializable {
         this.shoppingCartId = autoShoppingCartId();
         this.product = product;
         this.users = users;
-        this.orderQuantity = inputOrderQuantity(sc,product);
+        this.orderQuantity = inputOrderQuantity(sc, product);
 
     }
 
@@ -74,9 +74,9 @@ public class ShoppingCart implements Serializable {
             if (number <= 0) {
                 System.err.println("Số lượng phải > 0,vui lòng nhâp lại!");
             } else {
-                if(number <= product.getQuantity()){
+                if (number <= product.getQuantity()) {
                     return number;
-                }else {
+                } else {
                     System.err.println("Số lượng sản phẩm trong kho không đủ, vui lòng nhập lại!");
                 }
             }
@@ -92,9 +92,10 @@ public class ShoppingCart implements Serializable {
         }
         return max + 1;
     }
+
     public void displayShoppingCart() {
-        System.out.println(Color.CYAN+"+-----------------------+-------------------------------+---------------------+");
+        System.out.println(Color.CYAN + "+-----------------------+-------------------------------+---------------------+");
         System.out.printf("|Mã giỏ hàng: %-10d| Sản phẩm: %-20s| Số lượng: %-10d|\n",
-                this.shoppingCartId,this.product.getProductName(),this.orderQuantity);
+                this.shoppingCartId, this.product.getProductName(), this.orderQuantity);
     }
 }

@@ -10,6 +10,7 @@ import project.ra.utils.IOFile;
 import project.run.managements.GeneralProduct;
 import project.run.menu.MenuAdmin;
 import project.run.menu.MenuModerator;
+import project.run.menu.MenuOrder;
 import project.run.menu.MenuUsers;
 
 import java.util.Scanner;
@@ -33,6 +34,7 @@ public class Main {
             System.out.println(rowColor + "" + borderColor + "     2. Đăng nhập                                                 " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     3. Thông tin về sản phẩm                                     " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     4. Quên mật khẩu                                             " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     5. Order                                                     " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     5. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
             System.out.println(Color.PURPLE + "Lựa chọn của bạn:" + Color.RESET);
@@ -51,6 +53,9 @@ public class Main {
                     forgetPass(sc);
                     break;
                 case 5:
+                    MenuOrder.orderMenu(sc);
+                    break;
+                case 6:
                     System.exit(0);
                     break;
                 default:
@@ -61,6 +66,7 @@ public class Main {
 
     }
 
+    //lấy lại mật khẩu
     public static String forgetPass(Scanner sc) {
         System.out.println("Nhập email để tìm lại mật khẩu:");
         String email = sc.nextLine();
@@ -83,6 +89,7 @@ public class Main {
         return null;
     }
 
+    //đăng ký
     public static void handleRegister(Scanner sc) {
 
         Users user = new Users();
@@ -91,7 +98,7 @@ public class Main {
         System.out.println(Color.GREEN + "Đăng ký thành công!" + Color.RESET);
     }
 
-
+    //đăng nhập
     public static void handleLogin(Scanner sc) {
         System.out.println("Tên đăng nhập:");
         String userName = sc.nextLine();

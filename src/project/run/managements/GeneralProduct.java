@@ -17,7 +17,7 @@ public class GeneralProduct {
     public static final IProduct productFeatuer = new ProductImpl();
     public static final ICategory categoryFeatuer = new CategoryImpl();
 
-    public  void generalProductMenu(Scanner sc) {
+    public void generalProductMenu(Scanner sc) {
         boolean quit = true;
         do {
 
@@ -60,48 +60,52 @@ public class GeneralProduct {
         } while (quit);
     }
 
+    //hiển thị tất cả sản phẩm
     private void showAllProduct(Scanner sc) {
-        if(productFeatuer.findAll().isEmpty()){
+        if (productFeatuer.findAll().isEmpty()) {
             System.err.println("Danh mục sản phẩm trống!");
             return;
         }
-        for(Product p : productFeatuer.findAll()){
+        for (Product p : productFeatuer.findAll()) {
             p.displayProduct();
         }
-        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
     }
 
+    //tìm kiếm theo tên sản phẩm hoặc mô tả
     private void searchProductByNameOrDes(Scanner sc) {
         System.out.println("Nhập tên sản phẩm hoặc mô tả sản phẩm:");
         String input = sc.nextLine();
-        if(input.trim().isEmpty()){
+        if (input.trim().isEmpty()) {
             System.err.println("Không được để trống!");
             return;
         }
         boolean isExist = false;
-        for(Product p: productFeatuer.findAll()) {
-            if(p.getProductName().toLowerCase().contains(input.toLowerCase()) || p.getDescription().toLowerCase().contains(input.toLowerCase())) {
+        for (Product p : productFeatuer.findAll()) {
+            if (p.getProductName().toLowerCase().contains(input.toLowerCase()) || p.getDescription().toLowerCase().contains(input.toLowerCase())) {
                 p.displayProduct();
                 isExist = true;
-                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
                 System.out.println();
             }
         }
-        if(!isExist) {
-            System.err.println("Không tìm thấy sản phẩm " +input);
+        if (!isExist) {
+            System.err.println("Không tìm thấy sản phẩm " + input);
         }
     }
 
+    // sắp xếp sản phẩm mới
     private void newProduct() {
-        ProductImpl.productList.sort(Comparator.comparing(Product::getCreated));
+        ProductImpl.productList.sort(Comparator.comparing(Product::getCreated).reversed());
         for (Product p : ProductImpl.productList) {
             p.displayProduct();
         }
-        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+        System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
     }
 
+    //hiển thị sản phẩm theo danh mục
     private void showProduct(Scanner sc) {
         if (categoryFeatuer.findAll().isEmpty()) {
             System.err.println("Danh mục trống!");
@@ -120,7 +124,7 @@ public class GeneralProduct {
         for (Product p : productFeatuer.findAll()) {
             if (p.getCategory().getCategoryId() == number) {
                 p.displayProduct();
-                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
                 System.out.println();
                 return;
             }
@@ -128,6 +132,7 @@ public class GeneralProduct {
         System.err.println("Mã danh mục không đúng!");
     }
 
+    // thông tin sản phẩm
     private void getProductById(Scanner sc) {
         System.out.println("Nhập mã sản phẩm:");
         int number = FeatureAll.inputNumber(sc);
@@ -136,7 +141,7 @@ public class GeneralProduct {
             if (p.getProductId() == number) {
                 p.displayProduct();
                 isExist = true;
-                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+"+Color.RESET);
+                System.out.println("+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
                 System.out.println();
                 break;
             }

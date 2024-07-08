@@ -329,7 +329,7 @@ public class Users implements Serializable {
         System.out.printf("| Tên đăng nhập: %-20s| Email: %-37s| Tên: %-25s| trạng thái: %-10s| \n",
                 this.userName, this.email, this.fullName, this.status ? "Hoạt động" : "Khóa");
         System.out.printf("| Số điện thoại: %-20s| Địa chỉ: %-35s| Date: %-24s|                       |\n",
-                this.phone,this.adress,this.created !=null?sdf.format(this.created):"");
+                this.phone, this.adress, this.created != null ? sdf.format(this.created) : "");
 
     }
 }

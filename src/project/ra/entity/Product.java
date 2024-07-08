@@ -151,11 +151,11 @@ public class Product implements Serializable {
 
     public Category takeCategory(Scanner sc) {
         for (Category ca : CategoryImpl.categoryList) {
-            System.out.println(Color.CYAN +"+------------------------+------------------------------+");
+            System.out.println(Color.CYAN + "+------------------------+------------------------------+");
             System.out.printf("| Mã danh mục: %-10d| Tên danh mục: %-15s| \n",
                     ca.getCategoryId(), ca.getCategoryName());
         }
-        System.out.println(Color.CYAN +"+------------------------+------------------------------+" +Color.RESET);
+        System.out.println(Color.CYAN + "+------------------------+------------------------------+" + Color.RESET);
         System.out.println("Nhập mã danh mục để thêm sản phẩm:");
         do {
             int choice = FeatureAll.inputNumber(sc);
@@ -258,6 +258,6 @@ public class Product implements Serializable {
         System.out.printf("| Mã sản phẩm: %-32d| Tên sản phẩm: %-15s| Mô tả: %-30s| Danh mục: %-22s|\n",
                 this.productId, this.productName, this.description, this.category.getCategoryName());
         System.out.printf("| SKU: %-40s| Tồn kho: %-20d| Thời gian: %-26s| Giá: %-27.0f|\n",
-                this.sku,this.quantity, sdf.format(this.created), this.price);
+                this.sku, this.quantity, sdf.format(this.created), this.price);
     }
 }

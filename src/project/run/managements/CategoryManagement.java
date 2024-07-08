@@ -52,13 +52,14 @@ public class CategoryManagement {
     }
 
 
-
+    //xóa 1 sản phẩm
     private static void deleteCategory(Scanner sc) {
         System.out.println("Nhập mã danh mục muốn xóa:");
         int number = FeatureAll.inputNumber(sc);
         categoryFeature.delete(number);
     }
 
+    //cập nhật sản phẩm
     private static void updateCategory(Scanner sc) {
         System.out.println("Nhập mã danh muc:");
         int idUpdate = FeatureAll.inputNumber(sc);
@@ -105,6 +106,7 @@ public class CategoryManagement {
         }
     }
 
+    //thêm sản phẩm
     private static void addCategory(Scanner sc) {
         System.out.println("Nhập số lượng danh mục muốn thêm:");
         int number = FeatureAll.inputNumber(sc);
@@ -115,6 +117,7 @@ public class CategoryManagement {
         }
     }
 
+    //hiển thị danh mục
     private static void showAll() {
         if (CategoryImpl.categoryList.isEmpty()) {
             System.err.println("Danh mục trống!");
@@ -123,7 +126,7 @@ public class CategoryManagement {
         for (Category c : categoryFeature.findAll()) {
             c.displayCategory();
         }
-        System.out.println(Color.BLUE +"+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println(Color.BLUE + "+------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
     }
 }

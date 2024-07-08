@@ -60,7 +60,6 @@ public class WishListMenu {
         System.out.println("Nhập mã trong danh sách yêu thích muốn xóa");
         int number = FeatureAll.inputNumber(sc);
         int indexDelete = -1;
-
         for (WishList w : WhishListImpl.wishLists) {
             if (w.getWhishListId() == number && w.getId().getId() == user.getId()) {
                 indexDelete = w.getWhishListId();
@@ -124,11 +123,8 @@ public class WishListMenu {
             System.err.println("Danh sách yêu thích trống!");
             return;
         }
-        for (WishList w : wishlistFeature.findAll()) {
-            if (w.getId().getId() == user.getId()) {
-                w.displayWishList();
-            }
-        }
+        wishLists.forEach(WishList::displayWishList);
+
         System.out.println("+--------------+--------------------------------------------+" + Color.RESET);
         System.out.println();
     }

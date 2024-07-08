@@ -56,33 +56,36 @@ public class ProductManagement {
         } while (quit);
     }
 
+    //tìm kiếm sản phẩm
     private static void searchProduct(Scanner sc) {
-      if(productFeature.findAll().isEmpty()){
-          System.err.println("Danh mục sản phẩm trống!");
-          return;
-      }
+        if (productFeature.findAll().isEmpty()) {
+            System.err.println("Danh mục sản phẩm trống!");
+            return;
+        }
         System.out.println("Nhập mã sản phẩm:");
         int number = FeatureAll.inputNumber(sc);
         boolean isExist = false;
-        for(Product p:productFeature.findAll()){
-            if(p.getProductId() == number){
+        for (Product p : productFeature.findAll()) {
+            if (p.getProductId() == number) {
                 p.displayProduct();
                 isExist = true;
             }
         }
-        System.out.println(Color.BLUE +"+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println(Color.BLUE + "+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
-        if(!isExist){
-            System.err.println("Không tìm thấy sản phẩm có mã " +number);
+        if (!isExist) {
+            System.err.println("Không tìm thấy sản phẩm có mã " + number);
         }
     }
 
+    //xóa 1 sản phẩm
     private static void deleteProduct(Scanner sc) {
         System.out.println("Nhập mã sản phẩm:");
         int number = FeatureAll.inputNumber(sc);
         productFeature.delete(number);
     }
 
+    //cập nhật sản phẩm
     private static void updateProduct(Scanner sc) {
         System.out.println("Nhập mã sản phẩm:");
         int idUpdate = FeatureAll.inputNumber(sc);
@@ -128,6 +131,7 @@ public class ProductManagement {
 
     }
 
+    //thêm mới sản phẩm
     private static void addProduct(Scanner sc) {
         System.out.println("Nhập số lượng sản phẩm:");
         int number = FeatureAll.inputNumber(sc);
@@ -138,6 +142,7 @@ public class ProductManagement {
         }
     }
 
+    //hiển thị tất cả sản phẩm
     private static void showAll() {
         if (productFeature.findAll().isEmpty()) {
             System.err.println("Danh mục sản phẩm trống!");
@@ -146,7 +151,7 @@ public class ProductManagement {
         for (Product p : productFeature.findAll()) {
             p.displayProduct();
         }
-        System.out.println(Color.BLUE +"+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
+        System.out.println(Color.BLUE + "+----------------------------------------------+------------------------------+--------------------------------------+---------------------------------+" + Color.RESET);
         System.out.println();
 
     }

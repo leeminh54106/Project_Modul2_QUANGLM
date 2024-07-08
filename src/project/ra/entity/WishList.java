@@ -43,12 +43,14 @@ public class WishList implements Serializable {
     public void setWhishListId(int whishListId) {
         this.whishListId = whishListId;
     }
+
     //Nhập dữ liệu danh sách yêu thích
     public void inputWishList(Scanner sc, Product productId, Users userId) {
         this.whishListId = autowhishListId();
         this.productId = productId;
         this.id = userId;
     }
+
     // ID tự tăng
     private int autowhishListId() {
         int max = 0;
@@ -59,9 +61,10 @@ public class WishList implements Serializable {
         }
         return max + 1;
     }
+
     //Hiển thị danh sách yêu thích
     public void displayWishList() {
         System.out.println(Color.BLUE + "+--------------+--------------------------------------------+");
-        System.out.printf("|ID: %-10d| Tên sản phẩm:%-30s| \n",this.whishListId,this.productId.getProductName());
+        System.out.printf("|ID: %-10d| Tên sản phẩm:%-30s| \n", this.whishListId, this.productId.getProductName());
     }
 }

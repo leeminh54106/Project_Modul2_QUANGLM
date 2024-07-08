@@ -39,7 +39,6 @@ public class MenuUsers {
             switch (choice) {
                 case 1:
                     updateUser(sc);
-
                     break;
                 case 2:
                     showInformation();
@@ -63,15 +62,17 @@ public class MenuUsers {
         } while (quit);
 
     }
+    //dùng user đăng nhập để sét
+   static Users user = Main.userLogin;
 
-
+    //hiển thị thông tin người dùng
     private void showInformation() {
-        //dùng user đăng nhập để sét
-        Users user = Main.userLogin;
+
         user.displayUser();
         System.out.println(Color.CYAN + "+------------------------------------+---------------------------------------------+-------------------------------+-----------------------+" + Color.RESET);
     }
 
+    //cập nhật thông tin người dùng
     private void updateUser(Scanner sc) {
         boolean isExit = true;
         Users userUpdate = Main.userLogin;
@@ -91,7 +92,7 @@ public class MenuUsers {
             int choice = FeatureAll.inputNumber(sc);
             switch (choice) {
                 case 1:
-                    userUpdate.setUserName(userUpdate.inputFullName(sc));
+                    userUpdate.setFullName(userUpdate.inputFullName(sc));
                     System.out.println(Color.GREEN + "Cập nhật thành công!" + Color.RESET);
                     break;
                 case 2:

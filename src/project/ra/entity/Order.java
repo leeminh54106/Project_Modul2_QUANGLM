@@ -145,7 +145,6 @@ public class Order implements Serializable {
     }
 
 
-
     private String inputReceivePhone(Scanner sc) {
         String regex = "(0)\\d{9}";
         System.out.println("Nhập số điện thoại người nhận:");
@@ -211,7 +210,7 @@ public class Order implements Serializable {
 
     public void displayOrder() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println(Color.CYAN +"+-------------------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println(Color.CYAN + "+-------------------------------------------------------------------------------------------------------------------------------------------+");
         System.out.printf("|                                                                        %-67s| \n", sdf.format(this.creatd));
         System.out.println("+----------------------------------------+---------------------------------------------+----------------------------------------------------+");
         System.out.printf("|Mã Order: %-30d| Số seri: %-35s| Người dùng: %-39s| \n",
@@ -221,7 +220,7 @@ public class Order implements Serializable {
                 this.note, this.totalPrice,
                 this.status.equals(WAITING) ? "Đơn hàng mới chờ xác nhận" : this.status.equals(CONFIRM) ? "Đã xác nhận" :
                         this.status.equals(DELIVERY) ? "Đang giao hàng" : this.status.equals(CANCEL) ? "Đã hủy đơn" : "Bị từ chối");
-        System.out.println("+----------------------------------------+---------------------------------------------+----------------------------------------------------+" +Color.RESET);
-        System.out.println(Color.YELLOW +"                                       <------------------------------------------------->"+Color.RESET);
+        System.out.println("+----------------------------------------+---------------------------------------------+----------------------------------------------------+" + Color.RESET);
+        System.out.println(Color.YELLOW + "                                       <------------------------------------------------->" + Color.RESET);
     }
 }

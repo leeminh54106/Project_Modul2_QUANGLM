@@ -30,7 +30,7 @@ public class WhishListImpl implements IWhishList {
             wishLists.add(wishList);
         }
 
-        IOFile.writeToFile(IOFile.PATH_WISHLIST,wishLists);
+        IOFile.writeToFile(IOFile.PATH_WISHLIST, wishLists);
     }
 
     @Override
@@ -38,11 +38,11 @@ public class WhishListImpl implements IWhishList {
         int index = findIndexById(id);
         if (index >= 0) {
             wishLists.remove(index);
-            System.out.println(Color.GREEN+"Xóa sản phẩm thành công!");
+            System.out.println(Color.GREEN + "Xóa sản phẩm thành công!");
         } else {
             System.err.println("Mã sản phẩm không đúng!");
         }
-        IOFile.writeToFile(IOFile.PATH_WISHLIST,wishLists);
+        IOFile.writeToFile(IOFile.PATH_WISHLIST, wishLists);
     }
 
     @Override

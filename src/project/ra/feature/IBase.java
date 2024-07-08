@@ -2,7 +2,7 @@ package project.ra.feature;
 
 import java.util.List;
 
-public interface IBase<T,E> {
+public interface IBase<T, E> {
     List<T> findAll();
 
     void addOrUpdate(T t);
