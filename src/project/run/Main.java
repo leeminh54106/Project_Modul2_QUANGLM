@@ -35,7 +35,7 @@ public class Main {
             System.out.println(rowColor + "" + borderColor + "     3. Thông tin về sản phẩm                                     " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     4. Quên mật khẩu                                             " + rowColor);
             System.out.println(rowColor + "" + borderColor + "     5. Order                                                     " + rowColor);
-            System.out.println(rowColor + "" + borderColor + "     5. Thoát                                                     " + rowColor);
+            System.out.println(rowColor + "" + borderColor + "     6. Thoát                                                     " + rowColor);
             System.out.println(bottomColor);
             System.out.println(Color.PURPLE + "Lựa chọn của bạn:" + Color.RESET);
             int choice = FeatureAll.inputNumber(sc);
@@ -112,6 +112,7 @@ public class Main {
         System.out.println(Color.GREEN + "Đăng nhập thành công!" + Color.RESET);
         System.out.println();
         userLogin = user;
+
         //check quyền
         if (user.getRoleName().equals(RoleName.ROLE_ADMIN)) {
             MenuAdmin menuAdmin = new MenuAdmin();
